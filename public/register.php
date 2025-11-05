@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'logindb.php';
+include __DIR__ . '/../includes/logindb.php';
 
 $error = "";
 $success = "";
@@ -55,6 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $error = $registrationResult['message'];
     }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

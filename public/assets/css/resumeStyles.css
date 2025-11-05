@@ -112,23 +112,74 @@ footer {
     color: #444;
 }
 
-button {
-    background-color: #0a9396;  /* teal accent */
-    color: #fff;                /* white text */
-    padding: 12px 24px;
-    border: none;
-    border-radius: 8px;
+/* Footer container for buttons */
+.footer-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+/* Ensure form doesn't add extra margin/block spacing */
+.footer-buttons form {
+    margin: 0;
+}
+
+/* Shared base styles for perfect matching between <a> and <button> */
+.btn-download, .btn-logout, .btn-back {
+    display: inline-flex;      /* Use inline-flex for better centering and sizing control */
+    align-items: center;       /* Vertically center text */
+    justify-content: center;   /* Horizontally center text */
+    box-sizing: border-box;    /* Includes padding and border in the element's total width/height */
+    height: 48px;              /* Force exact same height */
+    padding: 0 24px;           /* Horizontal padding only, let height control vertical */
     font-size: 1rem;
+    font-family: 'Lato', sans-serif;
+    font-weight: normal;
+    text-decoration: none;
+    border-radius: 8px;
+    border: none;
     cursor: pointer;
     transition: background-color 0.25s ease, transform 0.2s ease;
+    line-height: 1;            /* Reset line-height to avoid differences */
+    vertical-align: middle;
+    color: #fff;               /* Both use white text */
 }
 
-button:hover {
-    background-color: #005f73;  /* darker teal on hover */
+/* Specific colors */
+.btn-download {
+    background-color: #0a9396; /* teal accent */
+}
+
+.btn-back {
+    background-color: #2d2d3f;
+}
+
+.btn-logout {
+    background-color: #e74c3c; /* red caution */
+}
+
+/* Hover states */
+.btn-download:hover {
+    background-color: #005f73;
+    color: #fff;
+}
+
+.btn-back:hover {
+    background-color: #3a3a4f;
+    color: #fff;
+}
+
+.btn-logout:hover {
+    background-color: #c0392b;
+}
+
+.btn-download:hover, .btn-back:hover, .btn-logout:hover {
     transform: translateY(-2px);
+    text-decoration: none; 
 }
 
-button:active {
+/* Active states for click effect */
+.btn-download:active, .btn-logout:active, .btn-back:active {
     transform: translateY(0);
-    background-color: #0b7b7e; /* slightly different when clicked */
 }

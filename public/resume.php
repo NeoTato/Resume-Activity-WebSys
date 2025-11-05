@@ -128,10 +128,14 @@
         </main>
         <footer>
             <p>&copy; Eon Busque</p>
-            <form action="logout.php" method="post" style="text-align:center; margin-top:20px;">
-                <button type="submit">Logout</button>
-            </form>
+            <div class="footer-buttons">
+                <a href="assets/resume/Busque-Resume.pdf" class="btn-download" download>Download Resume</a>
+                <a href="dashboard.php" class="btn-back">Back to Dashboard</a>
+                <form action="logout.php" method="post">
+                    <button type="submit" class="btn-logout">Logout</button>
+                </form>
 
+            </div>
         </footer>
     </div>
 </body>

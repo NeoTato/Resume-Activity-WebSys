@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'logindb.php';
+include __DIR__ . '/../includes/logindb.php';
 
 $error = "";
 
@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($row = pg_fetch_assoc($result)) {
         if (password_verify($password, $row['password'])) {
             $_SESSION["username"] = $username;
-            header("Location: resume.php");
+            header("Location: dashboard.php");
             exit;
         } else {
             $error = "Invalid password.";

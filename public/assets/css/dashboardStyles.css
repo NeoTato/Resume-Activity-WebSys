@@ -1,0 +1,72 @@
+/* --- Dashboard Specific Styles --- */
+
+.dashboard-actions {
+    margin-top: 30px;
+}
+
+/* Main dashboard action buttons (links) */
+.btn-dashboard {
+    display: block;
+    width: 100%;
+    max-width: 300px;        /* Limits width for neatness */
+    margin: 15px auto;       /* Centers the button */
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 500;
+    color: #fff;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    box-sizing: border-box;
+}
+
+.btn-edit {
+    background-color: #0a9396; /* Teal */
+}
+
+.btn-view {
+    background-color: #2d2d3f; /* Dark */
+}
+
+.btn-dashboard:hover {
+    transform: translateY(-3px);
+    color: #fff;
+}
+
+.btn-edit:hover {
+    background-color: #005f73;
+}
+
+.btn-view:hover {
+    background-color: #3a3a4f;
+}
+
+/* Dedicated class for Dashboard Logout Button */
+.btn-dashboard-logout {
+    /* Match .btn-dashboard sizing */
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    margin: 15px auto;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    text-align: center;
+    font-weight: 500;
+    box-sizing: border-box;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+
+    /* Button-specific resets & colors */
+    appearance: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'Lato', sans-serif; /* Ensures font matches */
+    color: #fff;
+    background-color: #e74c3c; /* Red */
+}
+
+.btn-dashboard-logout:hover {
+    background-color: #c0392b;
+    transform: translateY(-3px);
+}
