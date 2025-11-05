@@ -1,37 +1,82 @@
-/* --- Dashboard Specific Styles --- */
+.btn-dashboard, .btn-dashboard-logout {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    margin: 0;
+    padding: 15px;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-align: center;
+    color: #fff;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.dashboard-container {
+    width: 100%;
+    max-width: 450px;
+    margin: 60px auto;
+    background: #f9fafb;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    text-align: center;
+}
 
 .dashboard-actions {
     margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
 }
 
-/* Main dashboard action buttons (links) */
-.btn-dashboard {
-    display: block;
+.dashboard-actions form {
     width: 100%;
-    max-width: 300px;        /* Limits width for neatness */
-    margin: 15px auto;       /* Centers the button */
+    max-width: 300px;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.btn-dashboard {
+    text-decoration: none;
+}
+
+.btn-dashboard-logout {
+    width: 100%;
+    appearance: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'Lato', sans-serif;
+    background-color: #e74c3c;
     padding: 15px;
     border-radius: 8px;
+    box-sizing: border-box;
     font-size: 1.1rem;
-    text-align: center;
-    text-decoration: none;
     font-weight: 500;
+    text-align: center;
     color: #fff;
     transition: transform 0.2s ease, background-color 0.2s ease;
-    box-sizing: border-box;
 }
 
 .btn-edit {
-    background-color: #0a9396; /* Teal */
+    background-color: #0a9396;
 }
 
 .btn-view {
-    background-color: #2d2d3f; /* Dark */
+    background-color: #2d2d3f;
 }
 
-.btn-dashboard:hover {
+.btn-dashboard-logout {
+    background-color: #e74c3c;
+}
+
+.btn-dashboard:hover, .btn-dashboard-logout:hover {
     transform: translateY(-3px);
     color: #fff;
+    text-decoration: none;
 }
 
 .btn-edit:hover {
@@ -42,31 +87,6 @@
     background-color: #3a3a4f;
 }
 
-/* Dedicated class for Dashboard Logout Button */
-.btn-dashboard-logout {
-    /* Match .btn-dashboard sizing */
-    display: block;
-    width: 100%;
-    max-width: 300px;
-    margin: 15px auto;
-    padding: 15px;
-    border-radius: 8px;
-    font-size: 1.1rem;
-    text-align: center;
-    font-weight: 500;
-    box-sizing: border-box;
-    transition: transform 0.2s ease, background-color 0.2s ease;
-
-    /* Button-specific resets & colors */
-    appearance: none;
-    border: none;
-    cursor: pointer;
-    font-family: 'Lato', sans-serif; /* Ensures font matches */
-    color: #fff;
-    background-color: #e74c3c; /* Red */
-}
-
 .btn-dashboard-logout:hover {
     background-color: #c0392b;
-    transform: translateY(-3px);
 }
