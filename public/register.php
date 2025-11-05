@@ -5,25 +5,20 @@ include __DIR__ . '/../includes/logindb.php';
 $error = "";
 $success = "";
 
-// Handles user registration.
 function registerUser($connection, $username, $password, $confirmPassword) {
-    // Check for empty fields
     if (empty($username) || empty($password) || empty($confirmPassword)) {
         return ['success' => false, 'message' => "Please fill in all fields."];
     }
 
-    // Check for password mismatch
     if ($password !== $confirmPassword) {
         return ['success' => false, 'message' => "Error: Passwords do not match."];
     }
 
-    // Check if username exists
     $checkUser = pg_query_params($connection, "SELECT 1 FROM users WHERE username = $1", [$username]);
     if (pg_num_rows($checkUser) > 0) {
         return ['success' => false, 'message' => "Username already exists!"];
     }
 
-    // Insert new user
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
     $result = pg_query_params($connection, 
         "INSERT INTO users (username, password) VALUES ($1, $2)", 
@@ -37,7 +32,6 @@ function registerUser($connection, $username, $password, $confirmPassword) {
     }
 }
 
-// Main execution block
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = trim($_POST["username"] ?? '');
     $password = trim($_POST["password"] ?? '');
@@ -90,6 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </form>
 
         <p>Already have an account? <a href="login.php">Login here</a></p>
+        <p><a href="../index.php">Back to Home</a></p>
     </div>
 </body>
 </html>

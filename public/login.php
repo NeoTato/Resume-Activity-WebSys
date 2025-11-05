@@ -8,7 +8,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = trim($_POST["username"] ?? "");
     $password = trim($_POST["password"] ?? "");
 
-    // Fetch from database
     $result = pg_query_params($connection,
         "SELECT * FROM users WHERE username = $1 LIMIT 1",
         [$username]
@@ -55,6 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </form>
 
         <p>Don't have an account? <a href="register.php">Register here</a></p>
+        <p><a href="../index.php">Back to Home</a></p>
     </div>
 </body>
 </html>

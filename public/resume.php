@@ -1,83 +1,67 @@
 <?php
 session_start();
-include __DIR__ . '/../includes/logindb.php'; // Include database connection
+include __DIR__ . '/../includes/logindb.php';
 
-// 1. Authentication Check
-if (!isset($_SESSION["user_id"])) {
-    header("Location: login.php");
-    exit;
+$view_id = null;
+$is_authenticated = isset($_SESSION["user_id"]);
+
+if ($is_authenticated) {
+    $view_id = $_SESSION["user_id"];
+    $back_link = 'dashboard.php';
+    $back_text = 'Back to Dashboard';
+} else {
+    $view_id = 1; 
+    $back_link = '../index.php';
+    $back_text = 'Back to Home';
 }
-$user_id = $_SESSION["user_id"];
 
-// 2. Fetch Profile Data
-$resultProfile = pg_query_params($connection, "SELECT * FROM profiles WHERE user_id = $1", [$user_id]);
-$profile = pg_fetch_assoc($resultProfile);
+$profile = pg_fetch_assoc(pg_query_params($connection, "SELECT * FROM profiles WHERE user_id = $1", [$view_id]));
 
 if (!$profile) {
-    // This can happen if the user ran setup/fix scripts for a different user ID
-    die("Profile not found for this user. Please contact support or try running the setup script again.");
+    die("Resume profile not found.");
 }
 
-// Map database columns to the variables your HTML already uses
-$fullname = $profile['fullname'];
-$email = $profile['email'];
-$phone = $profile['phone'];
-$location = $profile['location'];
-$shortinfo = $profile['summary'];
-$profile_pic = $profile['profile_picture'] ?? 'assets/images/eon-profile-picture.png'; // Use default if DB is null
+$skills = pg_fetch_all(pg_query_params($connection, "SELECT * FROM skills WHERE user_id = $1 ORDER BY id", [$view_id])) ?: [];
+$education = pg_fetch_all(pg_query_params($connection, "SELECT * FROM educations WHERE user_id = $1 ORDER BY id", [$view_id])) ?: [];
+$projects = pg_fetch_all(pg_query_params($connection, "SELECT * FROM projects WHERE user_id = $1 ORDER BY id", [$view_id])) ?: [];
 
-// 3. Fetch Skills
-$resultSkills = pg_query_params($connection, "SELECT skill_name FROM skills WHERE user_id = $1 ORDER BY id", [$user_id]);
-// pg_fetch_all_columns fetches just the first column into a simple array
-$skills = pg_fetch_all_columns($resultSkills, 0) ?: []; 
-
-// 4. Fetch Education
-$resultEdu = pg_query_params($connection, "SELECT * FROM educations WHERE user_id = $1 ORDER BY start_year DESC", [$user_id]);
-$education = pg_fetch_all($resultEdu) ?: []; // Fetches all rows as an associative array
-
-// 5. Fetch Projects
-$resultProj = pg_query_params($connection, "SELECT * FROM projects WHERE user_id = $1 ORDER BY id ASC", [$user_id]);
-$projects = pg_fetch_all($resultProj) ?: [];
-
-// Close the connection
 pg_close($connection);
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/css/resumeStyles.css" type="text/css">
-    <title>My Resume</title>
+    <link rel="stylesheet" href="assets/css/resumeStyles.css">
+    <title><?php echo htmlspecialchars($profile['fullname'] ?? 'Resume'); ?></title>
 </head>
 
 <body>
     <div class="container">
         <header>
             <div class="profile-pic">
-                <!-- Use the profile picture from the database -->
-                <img src="<?php echo htmlspecialchars($profile_pic); ?>" alt="profile picture">
+                <img src="<?php echo htmlspecialchars($profile['profile_picture'] ?? 'assets/images/default-profile.png'); ?>" alt="profile picture">
             </div>
         </header>
         <main>
             <h1>
-                <?php echo htmlspecialchars($fullname); ?>
+                <?php echo htmlspecialchars($profile['fullname'] ?? ''); ?>
             </h1>
 
                 <section id="contact">
                     <p>
-                        <a href="mailto:<?php echo htmlspecialchars($email); ?>">
+                        <a href="mailto:<?php echo htmlspecialchars($profile['email'] ?? ''); ?>">
                             <img src="assets/images/mail.png" alt="Email icon" width="22px">
-                            <?php echo htmlspecialchars($email); ?>
+                            <?php echo htmlspecialchars($profile['email'] ?? ''); ?>
                         </a>
-                        <a href="tel:<?php echo htmlspecialchars($phone); ?>">
-                            <img src="assetsObject" notJSON-serializable"assets/images/phone.png" alt="Phone icon" width="22px">
-                            <?php echo htmlspecialchars($phone); ?>
+                        <a href="tel:<?php echo htmlspecialchars($profile['phone'] ?? ''); ?>">
+                            <img src="assets/images/phone.png" alt="Phone icon" width="22px">
+                            <?php echo htmlspecialchars($profile['phone'] ?? ''); ?>
                         </a>
                         <span>
                             <img src="assets/images/location.png" alt="Location icon" width="22px">
-                            <?php echo htmlspecialchars($location); ?>
+                            <?php echo htmlspecialchars($profile['location'] ?? ''); ?>
                         </span>
                     </p>
                 </section>
@@ -86,8 +70,7 @@ pg_close($connection);
 
                 <section>
                 <p>
-                    <!-- Use nl2br to respect line breaks from the database summary -->
-                    <?php echo nl2br(htmlspecialchars($shortinfo));?>
+                    <?php echo nl2br(htmlspecialchars($profile['summary'] ?? '')); ?>
                 </p>
                 </section>
 
@@ -110,7 +93,7 @@ pg_close($connection);
                     <ul> 
                         <?php
                         foreach ($skills as $skill) {
-                            echo "<li>" . htmlspecialchars($skill) . "</li>";
+                            echo "<li>" . htmlspecialchars($skill["skill_name"]) . "</li>";
                         }
                         ?>
                     </ul>
@@ -130,7 +113,7 @@ pg_close($connection);
                             <?php echo htmlspecialchars($edu["university"]); ?>
                             </dd>
                         <?php endforeach; ?>
-                    </dl>
+            </dl>
                 </section>
 
                 <hr>
@@ -139,12 +122,8 @@ pg_close($connection);
         <footer>
             <p>&copy; Eon Busque</p>
             <div class="footer-buttons">
+                <a href="<?php echo $back_link; ?>" class="btn-back"><?php echo $back_text; ?></a>
                 <a href="assets/resume/Busque-Resume.pdf" class="btn-download" download>Download Resume</a>
-                <a href="dashboard.php" class="btn-back">Back to Dashboard</a>
-                <form action="logout.php" method="post">
-                    <button type="submit" class="btn-logout">Logout</button>
-                </form>
-
             </div>
         </footer>
     </div>
