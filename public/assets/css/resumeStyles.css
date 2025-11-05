@@ -1,0 +1,134 @@
+html {
+    font-size: 18px;
+    font-family: 'Lato', sans-serif;
+    line-height: 1.75; /* slightly larger for readability */
+}
+
+body {
+    background-color: #1e1e2f; /* dark background */
+    margin: 0;
+    padding: 20px;
+    font-family: 'Lato', sans-serif;
+    font-size: 18px;
+    line-height: 1.75;
+    color: #222; /* ensure consistent text color */
+}
+
+/* Resume container */
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: #f9fafb; /*darkish white for contrast */
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+    color: #222; /* make sure all text inside container is dark */
+}
+
+/* Headings */
+h1 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #1e1e2f; /* use background color as accent */
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    color: #1e1e2f; /* darker for subheadings */
+    border-bottom: 2px solid #eee;
+    padding-bottom: 5px;
+    font-weight: bold;
+}
+
+h3 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    color: #1e1e2f; /* keep consistent */
+    font-weight: bold;
+}
+
+/* Contact section */
+#contact {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+#contact p {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    font-size: 1rem;
+}
+
+#contact img {
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+/* Links */
+a { 
+    color: #1e1e2f; /* matches bold headings */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    color: #333; /* subtle darker hover */
+    text-decoration: underline;
+}
+
+/* Profile picture */
+.profile-pic {
+    width: 200px;              
+    height: 200px;
+    margin: 0 auto 20px auto;  
+    border-radius: 50%;      
+    overflow: hidden;          
+    border: 2px solid #1e1e2f;    
+}
+
+.profile-pic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;        
+}
+
+/* Lists */
+ul, dl {
+    margin: 10px 0 20px 20px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 0.9rem;
+    color: #444;
+}
+
+button {
+    background-color: #0a9396;  /* teal accent */
+    color: #fff;                /* white text */
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.25s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #005f73;  /* darker teal on hover */
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(0);
+    background-color: #0b7b7e; /* slightly different when clicked */
+}

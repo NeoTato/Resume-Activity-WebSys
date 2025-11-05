@@ -1,0 +1,19 @@
+{
+    "intelephense.environment.includePaths": [
+        "${workspaceFolder}/.vscode/phpstubs"
+    ],
+    "intelephense.stubs": [
+        "pgsql",
+        "PDO",
+        "SPL",
+        "Reflection",
+        "standard",
+        "date",
+        "json",
+        "pcre",
+        "ctype",
+        "filter",
+        "session",
+        "xml"
+    ]
+}
