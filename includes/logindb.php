@@ -1,14 +1,13 @@
 <?php
-    $connection = pg_connect("host=localhost port=5432 dbname=logindb user=postgres password=eonpassword");
-    if (!$connection) {
-        die( "PostgreSQL connection failed." . pg_last_error());
-    }
+$db_host = "localhost";
+$db_port = "5432";
+$db_name = "yourdatabasename";
+$db_user = "postgres";
+$db_pass = "yourpassword"; 
 
-    $userTable = pg_query($connection, "
-        CREATE TABLE IF NOT EXISTS users (
-            id SERIAL PRIMARY KEY,
-            username VARCHAR(100) NOT NULL,
-            password VARCHAR(100) NOT NULL)"
-        );
+$connection = pg_connect("host=$db_host port=$db_port dbname=$db_name user=$db_user password=$db_pass");
 
+if (!$connection) {
+    die("PostgreSQL connection failed: " . pg_last_error());
+}
 ?>

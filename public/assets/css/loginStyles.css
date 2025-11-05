@@ -1,11 +1,11 @@
 body {
-    background-color: #1e1e2f; /* dark background */
+    background-color: #1e1e2f;
     margin: 0;
-    padding: 0; /* remove padding so centering works cleanly */
+    padding: 0;
     display: flex;
-    justify-content: center;   /* centers horizontally */
-    align-items: center;       /* centers vertically */
-    min-height: 100vh;         /* full viewport height */
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
     font-family: 'Lato', sans-serif;
     font-size: 20px;
     line-height: 1.75;
@@ -26,31 +26,28 @@ h3 {
     margin-bottom: 15px;
     font-weight: 400;
 }
-/* Login container */
 .container {
     width: 100%;
-    max-width: 400px; /* smaller for login */
+    max-width: 400px;
     background: #f9fafb; 
     padding: 40px;
     border-radius: 12px;
     box-shadow: 0 8px 25px rgba(0,0,0,0.4);
-    text-align: left; /* align form elements nicely */
+    text-align: left;
 }
 
-/* Input fields */
 input[type="text"],
 input[type="password"],
 input[type="submit"] {
-    width: 100%;              /* take full width of container */
-    padding: 12px;            /* make them bigger */
-    margin: 10px 0;           /* spacing between fields */
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
     border: 1px solid #ccc;
     border-radius: 6px;
     font-size: 1rem;
-    box-sizing: border-box;   /* ensures padding doesn’t mess width */
+    box-sizing: border-box;
 }
 
-/* Submit button specific styling */
 input[type="submit"] {
     width: 100%;
     padding: 12px;
@@ -59,29 +56,28 @@ input[type="submit"] {
     border-radius: 6px;
     font-size: 1rem;
     cursor: pointer;
-    background-color: #2d2d3f; /* softer dark gray */
-    color: #f0f0f0;           /* softer off-white text */
+    background-color: #2d2d3f;
+    color: #f0f0f0;
     font-weight: 500;
     transition: background 0.3s ease, transform 0.1s ease;
 }
 
 input[type="submit"]:hover {
-    background-color: #3a3a4f; /* slightly lighter on hover */
-    transform: translateY(-3px); /* subtle lift effect */
+    background-color: #3a3a4f;
+    transform: translateY(-3px);
 }
 
 input[type="submit"]:active {
-    background-color: #252536; /* darker when pressed */
-    transform: translateY(0); /* button returns down */
+    background-color: #252536;
+    transform: translateY(0);
 }
 
-/* Error message box */
 .error-message {
     color: #fff;
-    background-color: #e74c3c; /* red background */
+    background-color: #e74c3c;
     border: 1px solid #c0392b;
     padding: 10px;
-    margin: 10px 0 20px; /* spacing around it */
+    margin: 10px 0 20px;
     border-radius: 6px;
     font-weight: bold;
     text-align: center;
@@ -89,10 +85,9 @@ input[type="submit"]:active {
     animation: fadeIn 0.3s ease-in-out;
 }
 
-/* Success message box */
 .success-message {
     color: #fff;
-    background-color: #2ecc71; /* green background */
+    background-color: #2ecc71;
     border: 1px solid #27ae60;
     padding: 10px;
     margin: 10px 0 20px; 
@@ -103,7 +98,6 @@ input[type="submit"]:active {
     animation: fadeIn 0.3s ease-in-out;
 }
 
-/* Simple fade animation for error */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(-5px); }
     to { opacity: 1; transform: translateY(0); }

@@ -5,8 +5,8 @@ include __DIR__ . '/../includes/logindb.php';
 $error = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST["username"] ?? "";
-    $password = $_POST["password"] ?? "";
+    $username = trim($_POST["username"] ?? "");
+    $password = trim($_POST["password"] ?? "");
 
     // Fetch from database
     $result = pg_query_params($connection,
@@ -16,6 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($row = pg_fetch_assoc($result)) {
         if (password_verify($password, $row['password'])) {
+            $_SESSION["user_id"] = $row['id'];
             $_SESSION["username"] = $username;
             header("Location: dashboard.php");
             exit;

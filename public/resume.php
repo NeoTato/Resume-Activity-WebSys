@@ -1,40 +1,48 @@
 <?php
-    session_start();
+session_start();
+include __DIR__ . '/../includes/logindb.php'; // Include database connection
 
-    // If the user is not logged in, redirect to login page
-    if (!isset($_SESSION["username"])) {
-        header("Location: login.php");
-        exit;
-    }
+// 1. Authentication Check
+if (!isset($_SESSION["user_id"])) {
+    header("Location: login.php");
+    exit;
+}
+$user_id = $_SESSION["user_id"];
 
-    $fullname = "Eon Maxell P. Busque";
-    $email = "emp.busque38@gmail.com";
-    $phone = "+63 976 054 2971";
-    $location = "Tayabas City, Quezon, Philippines";
-    $shortinfo = "A third-year college student taking Computer Science in Batangas State University who has a passion for software development. <br> <br> Currently learning Php and Flutter.";
-    $skills = ["Python", "Java", "HTML", "CSS", "MySQL", "C#"];
-    $education = [
-        [
-        "program" => "Bachelor of Science in Computer Science",
-        "start_year" => "2023",
-        "end_year" => "2027",
-        "university" => "Batangas State University - The National Engineering University - Alangilan"
-        ]
-    ];
+// 2. Fetch Profile Data
+$resultProfile = pg_query_params($connection, "SELECT * FROM profiles WHERE user_id = $1", [$user_id]);
+$profile = pg_fetch_assoc($resultProfile);
 
-    $projects = [
-        [
-        "title" => "Wellness Tracker",
-        "description" => "A wellness tracker integrating MySQL to monitor meals, workouts, and sleep, promoting health and well-being."
-        ],
+if (!$profile) {
+    // This can happen if the user ran setup/fix scripts for a different user ID
+    die("Profile not found for this user. Please contact support or try running the setup script again.");
+}
 
-        [
-        "title" => "AGAPAY: Arduino-based Water Agitator",
-        "description" => "Designed and developed an Arduino-powered water agitator system with a team, focusing on backend using C++ and Python."
-        ],
-    ];
+// Map database columns to the variables your HTML already uses
+$fullname = $profile['fullname'];
+$email = $profile['email'];
+$phone = $profile['phone'];
+$location = $profile['location'];
+$shortinfo = $profile['summary'];
+$profile_pic = $profile['profile_picture'] ?? 'assets/images/eon-profile-picture.png'; // Use default if DB is null
+
+// 3. Fetch Skills
+$resultSkills = pg_query_params($connection, "SELECT skill_name FROM skills WHERE user_id = $1 ORDER BY id", [$user_id]);
+// pg_fetch_all_columns fetches just the first column into a simple array
+$skills = pg_fetch_all_columns($resultSkills, 0) ?: []; 
+
+// 4. Fetch Education
+$resultEdu = pg_query_params($connection, "SELECT * FROM educations WHERE user_id = $1 ORDER BY start_year DESC", [$user_id]);
+$education = pg_fetch_all($resultEdu) ?: []; // Fetches all rows as an associative array
+
+// 5. Fetch Projects
+$resultProj = pg_query_params($connection, "SELECT * FROM projects WHERE user_id = $1 ORDER BY id ASC", [$user_id]);
+$projects = pg_fetch_all($resultProj) ?: [];
+
+// Close the connection
+pg_close($connection);
+
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,27 +56,28 @@
     <div class="container">
         <header>
             <div class="profile-pic">
-                <img src="assets/images/eon-profile-picture.png" alt="eon profile picture">
+                <!-- Use the profile picture from the database -->
+                <img src="<?php echo htmlspecialchars($profile_pic); ?>" alt="profile picture">
             </div>
         </header>
         <main>
             <h1>
-                <?php echo $fullname?>
+                <?php echo htmlspecialchars($fullname); ?>
             </h1>
 
                 <section id="contact">
                     <p>
-                        <a href="mailto:emp.busque38@gmail.com">
+                        <a href="mailto:<?php echo htmlspecialchars($email); ?>">
                             <img src="assets/images/mail.png" alt="Email icon" width="22px">
-                            <?php echo "$email "; ?>
+                            <?php echo htmlspecialchars($email); ?>
                         </a>
-                        <a href="tel:09760542971">
-                            <img src="assets/images/phone.png" alt="Phone icon" width="22px">
-                            <?php echo "$phone"; ?>
+                        <a href="tel:<?php echo htmlspecialchars($phone); ?>">
+                            <img src="assetsObject" notJSON-serializable"assets/images/phone.png" alt="Phone icon" width="22px">
+                            <?php echo htmlspecialchars($phone); ?>
                         </a>
                         <span>
                             <img src="assets/images/location.png" alt="Location icon" width="22px">
-                            <?php echo "$location"; ?>
+                            <?php echo htmlspecialchars($location); ?>
                         </span>
                     </p>
                 </section>
@@ -77,7 +86,8 @@
 
                 <section>
                 <p>
-                    <?php echo "$shortinfo";?>
+                    <!-- Use nl2br to respect line breaks from the database summary -->
+                    <?php echo nl2br(htmlspecialchars($shortinfo));?>
                 </p>
                 </section>
 
@@ -87,8 +97,8 @@
                         <h2>Projects</h2>
                             <dl>
                                 <?php foreach ($projects as $project): ?>
-                                    <dt><h3><?php echo $project["title"]; ?></h3></dt>
-                                    <dd><?php echo $project["description"]; ?></dd>
+                                    <dt><h3><?php echo htmlspecialchars($project["title"]); ?></h3></dt>
+                                    <dd><?php echo htmlspecialchars($project["description"]); ?></dd>
                                 <?php endforeach; ?>
                             </dl>
                 </section>
@@ -100,7 +110,7 @@
                     <ul> 
                         <?php
                         foreach ($skills as $skill) {
-                            echo "<li>" . $skill . "</li>";
+                            echo "<li>" . htmlspecialchars($skill) . "</li>";
                         }
                         ?>
                     </ul>
@@ -113,14 +123,14 @@
                     <dl>
                         <?php foreach ($education as $edu): ?>
                             <dt>
-                            <?php echo $edu["program"]; ?> 
-                            (<?php echo $edu["start_year"] . " - " . $edu["end_year"]; ?>)
+                            <?php echo htmlspecialchars($edu["program"]); ?> 
+                            (<?php echo htmlspecialchars($edu["start_year"]) . " - " . htmlspecialchars($edu["end_year"]); ?>)
                             </dt>
                             <dd>
-                            <?php echo $edu["university"]; ?>
+                            <?php echo htmlspecialchars($edu["university"]); ?>
                             </dd>
                         <?php endforeach; ?>
-            </dl>
+                    </dl>
                 </section>
 
                 <hr>

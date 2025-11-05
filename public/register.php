@@ -5,22 +5,19 @@ include __DIR__ . '/../includes/logindb.php';
 $error = "";
 $success = "";
 
-/**
- * Handles user registration.
- * Returns an array with 'success' (bool) and 'message' (string).
- */
+// Handles user registration.
 function registerUser($connection, $username, $password, $confirmPassword) {
-    // Check fors empty fields
+    // Check for empty fields
     if (empty($username) || empty($password) || empty($confirmPassword)) {
         return ['success' => false, 'message' => "Please fill in all fields."];
     }
 
-    //Check for password mismatch
+    // Check for password mismatch
     if ($password !== $confirmPassword) {
         return ['success' => false, 'message' => "Error: Passwords do not match."];
     }
 
-    //Check if username exists
+    // Check if username exists
     $checkUser = pg_query_params($connection, "SELECT 1 FROM users WHERE username = $1", [$username]);
     if (pg_num_rows($checkUser) > 0) {
         return ['success' => false, 'message' => "Username already exists!"];
@@ -34,7 +31,7 @@ function registerUser($connection, $username, $password, $confirmPassword) {
     );
 
     if ($result) {
-        return ['success' => true, 'message' => "Registration successful! You can now <a href='login.php'>login</a>."];
+        return ['success' => true, 'message' => "Registration successful! You will be redirected to login..."];
     } else {
         return ['success' => false, 'message' => "Database Error: " . pg_last_error($connection)];
     }
@@ -55,7 +52,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $error = $registrationResult['message'];
     }
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -63,8 +59,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <title>Register Page</title>
     <link rel="stylesheet" href="assets/css/loginStyles.css">
-    <?php if (isset($switchToLogin) && ($switchToLogin)): ?>
-        <meta http-equiv="refresh" content="1;url=login.php">
+    <?php if (isset($switchToLogin) && $switchToLogin): ?>
+        <meta http-equiv="refresh" content="2;url=login.php">
     <?php endif; ?>
 </head>
 <body>

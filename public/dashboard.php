@@ -19,7 +19,7 @@ if (!isset($_SESSION["username"])) {
         <h3>Dashboard</h3>
 
         <div class="dashboard-actions">
-            <a href="#" class="btn-dashboard btn-edit">Edit Resume</a>
+            <a href="edit_resume.php" class="btn-dashboard btn-edit">Edit Resume</a>
             <a href="resume.php" class="btn-dashboard btn-view">View Public Resume</a>
         </div>
 
