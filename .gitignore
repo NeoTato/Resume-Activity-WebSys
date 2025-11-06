@@ -1,0 +1,35 @@
+# --- 1. GENERAL OPERATING SYSTEM/IDE FILES ---
+.DS_Store
+Thumbs.db
+.vscode
+.idea
+
+# --- 2. OLD PROJECT IGNORES (If still relevant) ---
+# Your original .env file (now obsolete)
+.env
+# Old project dependencies
+/vendor
+/node_modules
+/public/build 
+/public/storage
+
+# --- 3. LARAVEL BACKEND PROJECT IGNORES (CRITICAL) ---
+
+# Ignore the vendor folder (dependencies) inside the backend folder
+/backend/vendor
+
+# Ignore the node_modules folder (front-end tools) inside the backend folder
+/backend/node_modules
+
+# Ignore sensitive credentials and cache specific to the Laravel app
+/backend/.env
+/backend/.env.testing
+/backend/storage/*.key
+/backend/storage/*.crt
+/backend/storage/logs/*.log
+/backend/bootstrap/cache
+
+# Ignore symbolic link that holds uploaded files
+/backend/public/storage
+/backend/public/build 
+/backend/public/hot
