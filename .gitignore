@@ -4,12 +4,14 @@ Thumbs.db
 .vscode
 .idea
 
-# --- 2. OLD PROJECT IGNORES (If still relevant) ---
-# Your original .env file (now obsolete)
-.env
-# Old project dependencies
+# --- 2. OLD PROJECT OBSOLETE FILES (Aggressive Ignore) ---
+# Ignore the empty folders left over from the old project structure
 /vendor
 /node_modules
+/public
+
+# Ignore obsolete .env file if it's still floating around
+.env
 /public/build 
 /public/storage
 
