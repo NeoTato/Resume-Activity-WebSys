@@ -1,0 +1,25 @@
+<?php
+
+// app/Models/Project.php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+class Project extends Model
+{
+    protected $fillable = [
+        'user_id',
+        'title',          // Used in edit_resume.php
+        'description',    // Used in edit_resume.php
+    ];
+
+    /**
+     * Get the user that owns the project.
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+}

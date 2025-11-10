@@ -1,0 +1,36 @@
+# Resume-Activity-WebSys/backend/.gitignore
+
+# --- General Operating System/IDE Files ---
+.DS_Store
+Thumbs.db
+*.log
+.env.backup
+.phpactor.json
+.phpunit.result.cache
+.phpunit.cache
+/.fleet
+/.idea
+/.nova
+/.vscode
+/.zed
+auth.json
+Homestead.json
+Homestead.yaml
+
+# --- Project-Specific Ignores (Must be relative to the backend folder) ---
+
+# CRITICAL LARAVEL IGNORES (Fixed Paths)
+/vendor
+/node_modules
+/.env
+/.env.testing
+/storage/*.key
+/storage/*.crt
+/storage/logs/*.log
+/storage/pail
+
+# Compiled Assets and Cache
+/public/build
+/public/hot
+/public/storage
+/bootstrap/cache/*.php

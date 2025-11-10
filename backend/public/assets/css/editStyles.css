@@ -1,0 +1,222 @@
+.error-message {
+    color: #fff;
+    background-color: #e74c3c; 
+    border: 1px solid #c0392b;
+    padding: 10px;
+    margin: 10px 0 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    text-align: center;
+    font-size: 0.95rem;
+}
+
+.success-message {
+    color: #fff;
+    background-color: #2ecc71; 
+    border: 1px solid #27ae60;
+    padding: 10px;
+    margin: 10px 0 20px; 
+    border-radius: 6px;
+    font-weight: bold;
+    text-align: center;
+    font-size: 0.95rem;
+}
+
+.btn-dashboard-position {
+    display: block; 
+    max-width: 300px;
+    margin: 0 auto 20px auto; 
+    padding: 12px 24px;
+    text-align: center; 
+}
+
+
+.edit-form label {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-top: 15px;
+    display: block;
+}
+
+.edit-form input[type="text"],
+.edit-form input[type="email"],
+.edit-form input[type="tel"],
+.edit-form input[type="number"],
+.edit-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    font-size: 1rem;
+    font-family: 'Lato', sans-serif;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box; 
+}
+
+.edit-form textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+
+.dynamic-item {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.dynamic-item input[type="text"],
+.dynamic-item input[type="number"] {
+    flex-grow: 1;
+}
+
+.dynamic-item .item-fields {
+    flex-grow: 1;
+    border: 1px dashed #ccc;
+    padding: 15px;
+    border-radius: 6px;
+}
+
+.dynamic-item .item-fields label {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 5px;
+}
+
+.dynamic-item .item-fields input,
+.dynamic-item .item-fields textarea {
+    margin-bottom: 10px;
+}
+
+
+.btn-remove, .btn-add {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: bold;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.btn-remove {
+    background-color: #e74c3c;
+    color: white;
+}
+.btn-remove:hover { background-color: #c0392b; }
+
+.btn-add {
+    background-color: #0a9396; 
+    color: white;
+    margin-top: 10px;
+}
+.btn-add:hover { background-color: #005f73; }
+
+
+.btn-save {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    margin: 40px auto 10px auto;
+    padding: 15px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #2ecc71;
+    color: white;
+    transition: all 0.2s ease;
+}
+.btn-save:hover { background-color: #27ae60; transform: translateY(-3px); }
+
+hr.form-divider {
+    margin: 30px 0;
+    border: 0;
+    border-top: 2px solid #eee;
+}
+
+/* Applying button styles (like .btn-back) to the label */
+.btn-browse-style {
+    /* Base Button properties (ensures it looks like other buttons) */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box; /* Crucial for consistent sizing */
+    height: 48px; 
+    padding: 0 24px;
+    
+    /* Styling overrides for the file input */
+    font-size: 1rem;
+    font-family: 'Lato', sans-serif;
+    font-weight: normal;
+    text-decoration: none !important; /* Override default link decoration */
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.25s ease, transform 0.2s ease;
+    line-height: 48px;
+    vertical-align: middle;
+    color: #fff;
+    
+    /* Specific color matching the btn-back button (from resumeStyles.css) */
+    background-color: #2d2d3f; 
+}
+
+/* Hover state matching the btn-back button */
+.btn-browse-style:hover {
+    background-color: #3a3a4f;
+    transform: translateY(-2px);
+}
+
+/* Update the .file-upload-container block (Add position: relative;) */
+.file-upload-container {
+    display: flex; 
+    align-items: center; 
+    gap: 15px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    
+    /* CRITICAL: Allows child element to be absolutely positioned */
+    position: relative; 
+    height: 48px; 
+}
+
+/* Update the .file-name-display block */
+.file-name-display {
+    font-size: 0.95rem;
+    color: #555;
+    
+    /* CRITICAL: Absolute positioning for vertical centering */
+    position: absolute;
+    top: 50%;
+    left: 170px; /* <--- This sets the horizontal position relative to the container */
+    transform: translateY(-50%); /* This handles the vertical centering based on the top: 50% setting */
+
+    /* Ensure zero margins/padding */
+    margin: 0; 
+    padding: 0; 
+    line-height: normal; 
+    
+    /* General overflow properties */
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dashboard-link-container {
+    /* Add top margin to push the button down from the paragraph above it */
+    margin-top: 15px; 
+    
+    /* Ensure the button is aligned to the left */
+    text-align: left; 
+}
+
+.dashboard-link-container .btn-back {
+    height: 55px;
+    padding: 0 30px;
+    font-size: 1.1rem;
+}
