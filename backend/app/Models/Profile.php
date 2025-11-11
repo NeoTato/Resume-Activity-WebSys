@@ -18,17 +18,15 @@ class Profile extends Model
 
     protected $fillable = [
         'user_id',
-        'fullname',       // Used in edit_resume.php
-        'email',          // Used in edit_resume.php
-        'phone',          // Used in edit_resume.php
-        'location',       // Used in edit_resume.php
-        'summary',        // Used in edit_resume.php
-        'profile_picture',// Used in edit_resume.php
+        'fullname',       
+        'email',          
+        'phone',          
+        'location',       
+        'summary',        
+        'profile_picture',
     ];
 
-    /**
-     * Get the user that owns the profile.
-     */
+    // Get the user that owns the profile.
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

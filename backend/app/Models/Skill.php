@@ -1,7 +1,5 @@
 <?php
 
-// app/Models/Skill.php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -11,12 +9,10 @@ class Skill extends Model
 {
     protected $fillable = [
         'user_id',
-        'skill_name',     // Used in edit_resume.php
+        'skill_name',     
     ];
 
-    /**
-     * Get the user that owns the skill.
-     */
+    // Get the user that owns the skill.
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

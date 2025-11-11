@@ -11,13 +11,11 @@ class Project extends Model
 {
     protected $fillable = [
         'user_id',
-        'title',          // Used in edit_resume.php
-        'description',    // Used in edit_resume.php
+        'title',          
+        'description',    
     ];
 
-    /**
-     * Get the user that owns the project.
-     */
+    //Get the user that owns the project.
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
